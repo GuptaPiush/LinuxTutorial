@@ -50,3 +50,11 @@ chmod 777 mydoc.txt – read, write, execute for all! (may not be the best plan 
 BASH Shell
 ===========
  bash means "Bourne Again Shell".
+ 
+ which : which command will find the stored programs
+ ex: which echo, which pwd
+ whereis : command to find the executable
+ ex: whereis echo
+ 
+ sudo: superuser do Admin
+ 
