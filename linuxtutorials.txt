@@ -58,3 +58,204 @@ BASH Shell
  
  sudo: superuser do Admin
  
+ mv: Rename the file and folders
+mv file.txt file.bcp
+
+rm : delete the file and folders
+rm <<filename>>
+rm  -r <<firectory>>
+
+cp: copy the file name
+cp <<filename>> <<path/filename>>
+cp -r <<directory>> <<path/directory>>
+
+&
+If you put & at the end of any command then that command will exectute in the background
+
+&& : And Operator
+mkdir p && cd p
+
+|| OR Operator
+mkdir p || cd p
+
+;
+command can be seperated and execute multiple commands at the same time
+rmdir p ; cd a
+
+!
+rm ! (*.txt) so it will delete all the files execpt .txt
+
+Command redirection
+====================
+stdin (0)
+stdout (1)
+stderr (2)
+
+Sending the input as file to any command or saving the output in any file is command re-direction
+
+> : (save the output to any file) erase the existing data
+ls > a.txt 
+
+>> : it will appened the existing data
+
+<: send the input to the command 
+
+Pipeline | :  send the output of one command to input as other command
+
+Process Management
+====================
+
+Any Program that runs in computer memory is called process
+Automatic Process : Started by the systemduring the boot time
+Interactive Process : Run by the user commands from shell
+
+commands
+============
+
+ps: View the list of process running in your system
+ps -e : list all the system running in your system with time
+ps -ef: list all the system running in your system with full format
+ps -ax : Show all the system running in your system with sort bsd format
+ps -aux : Show all the system running in your system with long bsd format
+ps -u <<username>> : list out the process started by user <<username>>
+
+top command
+============
+time, uptime, number of user, load-average: number of processes waiting to handle by cpu,
+number of tasks are running, stopped, sleeping, zombie : process has been already completed by still having entry in the list, 
+%cpu : 
+us userspace : {Involvment of cpu to user process} 
+sy system space : cpu activity in system activity
+ni : amount of time spent by the the CPU to process the low priority tasks
+id : inactivity of the cpu
+wa: amount of time waiting cpu to get input from hardware connected to the system
+hi: amount of time spent  cpu to interact with hardware connected to the system
+si : amount of time spent  cpu to interact with software
+st stolen time : stolen time by hyper v to that system
+memory : total available used buffer cache memory
+swap memory: Swap is a space on a disk that is used when the amount of physical RAM memory is full. total available used buffer cache memory
+
+PID
+USER
+PR: priority of the tasks
+ni: nice value
+VIRT: total amount claimed by the process
+REST: used memory from VIRT
+
+To Kill the process press k and provide the pid number as signal
+top -d 2 : delay by 2 sec
+top -p <<process ID>>
+top -b : non interactive mode
+top -u <<username>> : details about the process owned bu <<username>>
+uptime : shows the uptime of the system/server
+free : Shows the free amount of memory
+
+Set up the priority of the Process
+===================================
+sudo nice -n -15 <<command name>>(it can reduce by -20 to 19) if you want to decrese the value put -value and if increase only put the value 
+ renice : to set the priority for userspace
+ sudo renice -10 -u <<username>>
+ 
+Kill the process
+=================
+kill << processidnumber>>
+kill -9 << processidnumber>>
+kill all <<Process name>>
+
+fuser : Powerfull utility for system admin which gives the info about file user or the process being currently used.
+fuser /
+fuser -v /
+
+c - current directory
+e - executable being Run
+f - open file
+F - Open file for writing
+r - root
+m - managed file or directory
+
+nohup <<filename>>
+
+User Management
+=================
+Create or Add user in linux
+You need to be sudo 
+1. useradd : it will not create the home directory for the user and you need to set the password explicitly.
+2. adduser : It will ask all the details one by one so no need to provide using different switches. And it will create /home directory automatically
+
+To see the creted user
+chage -l <<username>>
+
+set the password to user
+passwd <<username>>
+
+Create the home directory for the user
+1. create folder with user name
+mkdir <<username>>
+copy all the content from /etc/skel to home directory
+
+2. sudo mkhomedir_helper <<username>>
+3. sudo useradd -m <<username>>
+
+Add the full name of the user
+==============================
+sudo useradd -c "full username" <<username>>
+ to verify use finger <<username>>
+ 
+ Setup the expiray date of the user
+ ==================================
+ sudo useradd -e dd/mm/yyyy <<username>>
+ 
+ get the id of the user
+ ======================
+ id <<username>>
+ uid: user id used by the server to identify the user 
+ user ID 0 is reserved for root user
+ User ID can be set during the creation of the user
+ sudo useradd -u <<0-65553>> <<username>>
+ 
+ List the groups
+ =================
+ groups : command to see the groups
+ add users to groups
+ sudo useradd -G <<gpname>> <<username>>
+ 
+ setup the shell to user
+ =======================
+ sudo useradd -s /bin/sh <<username>>
+ 
+ Modify the user
+ ================
+ sudo usermod <<switch>> command
+ ex: sudo usermod -c "Steve Jobs" <<username>>
+ 
+ To revoke the shell access to user
+ ===================================
+ sudo usedmod -s /bin/false <<username>>
+ 
+ To Lock the user
+ ================
+ User wont be able to login
+ sudo usedmod -L <<username>>
+ 
+  To UnLock the user
+ ======================
+ Unlock the user as passwordless account
+ sudo usedmod -U <<username>>
+ 
+ To delete the user account
+ ===========================
+ sudo userdel <<username>>
+ sudo userdel -r <<username>> : it will delete the home folder of the user as well
+ 
+ 
+ 
+ 
+ 
+  
+
+
+
+ 
+
+
+ 
